@@ -1261,7 +1261,6 @@ int ntoh_tcp_add_segment ( pntoh_tcp_session_t session , pntoh_tcp_stream_t stre
 	if ( !tcp->th_flags || tcp->th_flags == 0xFF )
 		return NTOH_INVALID_FLAGS;
 
-	lock_access ( &stream->lock );
 
 	/* check TCP ports */
 	if ( !(
@@ -1270,6 +1269,7 @@ int ntoh_tcp_add_segment ( pntoh_tcp_session_t session , pntoh_tcp_stream_t stre
 	))
 		return NTOH_TCP_PORTS_MISMATCH;
 
+	lock_access ( &stream->lock );
 	if ( ip4hdr->ip_v == 4 )
 		payload_len = ntohs(ip4hdr->ip_len) - iphdr_len - tcphdr_len;
 	else
