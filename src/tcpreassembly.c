@@ -1343,7 +1343,9 @@ int ntoh_tcp_add_segment ( pntoh_tcp_session_t session , pntoh_tcp_stream_t stre
 						((pntoh_tcp_callback_t)stream->function) ( stream , origin , destination , 0 , NTOH_REASON_SYNC , NTOH_REASON_SYNC );
 				}
 			}else{
+				unlock_access ( &stream->lock );
 				lock_access ( &session->lock );
+				lock_access ( &stream->lock );
 				delete_stream ( session , &stream , NTOH_REASON_SYNC , ret );
 				unlock_access ( &session->lock );
 			}
@@ -1361,7 +1363,9 @@ int ntoh_tcp_add_segment ( pntoh_tcp_session_t session , pntoh_tcp_stream_t stre
 
 			if ( stream->status == NTOH_STATUS_CLOSED )
 			{
+				unlock_access ( &stream->lock );
 				lock_access ( &session->lock );
+				lock_access ( &stream->lock );
 				__tcp_free_stream ( session , &stream , NTOH_REASON_SYNC , NTOH_REASON_CLOSED );
 				unlock_access ( &session->lock );
 				stream = 0;
