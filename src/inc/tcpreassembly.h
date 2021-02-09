@@ -32,7 +32,6 @@
  ********************************************************************************/
 
 #define __FAVOR_BSD
-#include <netinet/tcp.h>
 #include <netinet/ip.h>
 #include <netinet/tcp.h>
 #include <sys/socket.h>
@@ -49,6 +48,10 @@
 
 #ifndef IP4_ADDR_LEN
 # define IP4_ADDR_LEN	4
+#endif
+
+#ifndef TCPI_OPT_SACK
+# define TCPI_OPT_SACK	2
 #endif
 
 /** @brief connection status **/

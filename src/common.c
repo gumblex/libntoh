@@ -34,7 +34,7 @@
 /********************/
 /** ACCESS LOCKING **/
 /********************/
-_HIDDEN void lock_access ( pntoh_lock_t lock )
+void lock_access ( pntoh_lock_t lock )
 {
 	pthread_mutex_lock( &lock->mutex );
 
@@ -48,7 +48,7 @@ _HIDDEN void lock_access ( pntoh_lock_t lock )
 	return;
 }
 
-_HIDDEN void unlock_access ( pntoh_lock_t lock )
+void unlock_access ( pntoh_lock_t lock )
 {
 	pthread_mutex_lock( &lock->mutex );
 
@@ -60,7 +60,7 @@ _HIDDEN void unlock_access ( pntoh_lock_t lock )
 	return;
 }
 
-_HIDDEN void free_lockaccess ( pntoh_lock_t lock )
+void free_lockaccess ( pntoh_lock_t lock )
 {
 	pthread_cond_destroy( &lock->pcond );
 	pthread_mutex_destroy( &lock->mutex );
