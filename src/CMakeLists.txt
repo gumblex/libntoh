@@ -14,8 +14,8 @@ SET ( CMAKE_BUILD_TYPE Release )
 # set sources
 SET ( LIBNTOH_SRCS libntoh.c tcpreassembly.c ipv4defrag.c ipv6defrag.c common.c sfhash.c )
 # set cflags
-SET ( CMAKE_C_FLAGS "-Wall -Os -O3 -pipe -fPIC" )
-#SET ( CMAKE_C_FLAGS "-g -Wall -Os -O3 -pipe" ) // static: comment the line above and uncomment this one to compile as static library (contrib by Di3)
+#SET ( CMAKE_C_FLAGS "-Wall -Os -O3 -pipe -fPIC" )
+SET ( CMAKE_C_FLAGS "-g -Wall -Os -O3 -pipe" ) 
 # set output name
 SET ( OUTPUT_LIB ntoh )
 # set interface files
@@ -34,8 +34,8 @@ INCLUDE_DIRECTORIES ( ${CMAKE_CURRENT_SOURCE_DIR})
 INCLUDE_DIRECTORIES ( ${CMAKE_INCLUDE_PATH})
 
 # set target from source
-ADD_LIBRARY( ${OUTPUT_LIB} SHARED ${LIBNTOH_SRCS} )
-#ADD_LIBRARY( ${OUTPUT_LIB} STATIC ${LIBNTOH_SRCS} ) // static: comment the line above and uncomment this one to compile as static library (contrib by Di3)
+#ADD_LIBRARY( ${OUTPUT_LIB} SHARED ${LIBNTOH_SRCS} )
+ADD_LIBRARY( ${OUTPUT_LIB} STATIC ${LIBNTOH_SRCS} ) 
 
 # pkgconfig file
 CONFIGURE_FILE ( ntoh.pc.in ntoh.pc @ONLY )
@@ -47,8 +47,8 @@ TARGET_LINK_LIBRARIES( ${OUTPUT_LIB} ${CMAKE_THREAD_LIBS_INIT})
 # set install information #
 ###########################
 # library
-INSTALL ( TARGETS ${OUTPUT_LIB} LIBRARY DESTINATION lib )
-#INSTALL ( TARGETS ${OUTPUT_LIB} ARCHIVE DESTINATION lib )// static: comment the line above and uncomment this one to compile as static library (contrib by Di3)
+#INSTALL ( TARGETS ${OUTPUT_LIB} LIBRARY DESTINATION lib )
+INSTALL ( TARGETS ${OUTPUT_LIB} ARCHIVE DESTINATION lib )
 # headers
 INSTALL ( FILES ${LIBNTOH_INC}/libntoh.h ${LIBNTOH_INC}/tcpreassembly.h ${LIBNTOH_INC}/sfhash.h ${LIBNTOH_INC}/ipv4defrag.h ${LIBNTOH_INC}/ipv6defrag.h ${LIBNTOH_INC}/common.h DESTINATION include/libntoh )
 # pkconfig file
